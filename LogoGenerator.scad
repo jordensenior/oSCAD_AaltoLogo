@@ -5,8 +5,9 @@ LogoOption = rands(0, 2, 1); //random number generator. 0 = ?, 1 = !, 2 = ". Inp
 
 h=100; //extrusion height, in mm
 s=1; //scale
-x = 400;
-y = 400;
+o=-1; //offset
+x = 400; //box horizontal size. Enter 0 for no box.
+y = 400; //box vertical size. Enter 0 for no box.
 
 
 
@@ -14,31 +15,31 @@ y = 400;
 if(x > 0){
 difference(){cube([x*s,y*s,h]);
 {
-if(round(LogoOption[0]) == 0) Question(2*h,s,h/2,x,y);
-if(round(LogoOption[0]) == 1) Exclame(2*h,s,h/2,x,y);
-if(round(LogoOption[0]) == 2) Quote(2*h,s,h/2,x,y);}}
+if(round(LogoOption[0]) == 0) Question(1.1*h,s,o,x,y);
+if(round(LogoOption[0]) == 1) Exclame(1.1*h,s,o,x,y);
+if(round(LogoOption[0]) == 2) Quote(1.1*h,s,o,x,y);}}
 }
 
 else {
-if(round(LogoOption[0]) == 0) Question(2*h,s,h/2,0,0);
-if(round(LogoOption[0]) == 1) Exclame(2*h,s,h/2,0,0);
-if(round(LogoOption[0]) == 2) Quote(2*h,s,h/2,0,0);
+if(round(LogoOption[0]) == 0) Question(1.1*h,s,o,x,y);
+if(round(LogoOption[0]) == 1) Exclame(1.1*h,s,o,x,y);
+if(round(LogoOption[0]) == 2) Quote(1.1*h,s,o,x,y);
 }
 module Question(h,s,offs,x,y) {
-    translate(x,y,offs)
-    linear_extrude(height = h, convexity = 10)
+    translate([x/5,y/3,offs])
+    linear_extrude(height = h, convexity = 4)
     import("Aalto_logo_question.dxf",scale = s); 
 }
 
 module Exclame(h,s,offs,x,y) {
-    translate(x,y,offs)
-    linear_extrude(height = h, convexity = 10)
-    import("Aalto_logo_exclame.dxf",,scale = s); 
+    translate([x/5,y/3,offs])
+    linear_extrude(height = h, convexity = 4)
+    import("Aalto_logo_exclame.dxf",scale = s); 
 }
 
 module Quote(h,s,offs,x,y) {
-    translate(x,y,offs)
-    linear_extrude(height = h, convexity = 10)
+    translate([x/5,y/3,offs])
+    linear_extrude(height = h, convexity = 4)
     import("Aalto_logo_quote.dxf",scale = s); 
 }
 
